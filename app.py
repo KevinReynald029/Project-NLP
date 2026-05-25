@@ -11,15 +11,14 @@ import gdown
 
 @st.cache_resource
 def download_large_models():
-    if not (os.path.exists("./model_indobert_final/model.safetensors") or os.path.exists("./model_indobert_final/pytorch_model.bin")):
-        with st.spinner("⏳ Menyiapkan model Deep Learning di Server Cloud (Proses ini hanya berjalan 1-2 menit saat pertama kali website dibuka)..."):
+    if not os.path.exists("./model_indobert_final"):
+        with st.spinner("⏳ Sedang menyedot file model raksasa dari GDrive (Proses 1-3 menit)..."):
             
             id_gdrive = "1fSgGWcs4ZQbaTyyZRSf-kXD6hKnifGw3" 
-            url = f'https://drive.google.com/uc?id={id_gdrive}'
             output = 'models_final.zip'
             
-
-            gdown.download(url, output, quiet=False)
+            # Gunakan id=...
+            gdown.download(id=id_gdrive, output=output, quiet=False)
             
             with zipfile.ZipFile(output, 'r') as zip_ref:
                 zip_ref.extractall('.')
