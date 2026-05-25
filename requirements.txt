@@ -1,6 +1,6 @@
 streamlit
 transformers
---extra-index-url https://download.pytorch.org/whl/cpu
+torch --index-url https://download.pytorch.org/whl/cpu
 joblib
 scikit-learn==1.6.1
 Sastrawi
