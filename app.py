@@ -11,13 +11,12 @@ import gdown
 
 @st.cache_resource
 def download_large_models():
-    if not os.path.exists("./model_indobert_final"):
+    if not os.path.exists("./Indobert&IndoALBERT"):
         with st.spinner("⏳ Sedang menyedot file model raksasa dari GDrive (Proses 1-3 menit)..."):
             
             id_gdrive = "1fSgGWcs4ZQbaTyyZRSf-kXD6hKnifGw3" 
             output = 'models_final.zip'
             
-            # Gunakan id=...
             gdown.download(id=id_gdrive, output=output, quiet=False)
             
             with zipfile.ZipFile(output, 'r') as zip_ref:
@@ -221,11 +220,11 @@ st.info(f"🔍 Daftar file/folder di server saat ini: {os.listdir('.')}")
 # ── Load models ──
 @st.cache_resource
 def load_models():
-    path_bert = "./model_indobert_final/"
+    path_bert = "./Indobert&IndoALBERT/model_indobert_final/"
     tokenizer_bert = AutoTokenizer.from_pretrained(path_bert)
     model_bert = AutoModelForSequenceClassification.from_pretrained(path_bert)
 
-    path_albert = "./model_indoalbert_tuned/"
+    path_albert = "./Indobert&IndoALBERT/model_indoalbert_tuned/"
     tokenizer_albert = AutoTokenizer.from_pretrained(path_albert)
     model_albert = AutoModelForSequenceClassification.from_pretrained(path_albert)
 
