@@ -1,0 +1,7 @@
+streamlit
+transformers
+torch
+joblib
+scikit-learn==1.6.1
+Sastrawi
+gdown
