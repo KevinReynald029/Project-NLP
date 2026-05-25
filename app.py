@@ -309,11 +309,23 @@ if run:
             confidence_str = f"Keyakinan model: {skor:.2f}%"
         else:
             text_tfidf = tfidf_vectorizer.transform([text_ready])
-            pred_idx = (svm_model if pilihan_model == "SVM" else rf_model).predict(text_tfidf)[0]
+            model_dipilih = svm_model if pilihan_model == "SVM" else rf_model
+            pred_idx = model_dipilih.predict(text_tfidf)[0]
+            
+            # Penentuan label
             if isinstance(pred_idx, str):
                 prediction = 0 if pred_idx == 'negatif' else (1 if pred_idx == 'netral' else 2)
             else:
                 prediction = pred_idx
+                
+            # Menghitung persentase keyakinan untuk SVM dan Random Forest
+            try:
+                probs = model_dipilih.predict_proba(text_tfidf)[0]
+                skor = probs.max() * 100
+                confidence_str = f"Keyakinan model: {skor:.2f}%"
+            except AttributeError:
+                # Berjaga-jaga jika model SVM tidak di-training dengan parameter probability=True
+                confidence_str = "Keyakinan model: Tidak didukung"
 
         verdict   = label_text[prediction]
         css_class = label_class[prediction]
