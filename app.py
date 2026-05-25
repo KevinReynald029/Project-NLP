@@ -216,7 +216,7 @@ st.markdown('<p class="app-dateline">Pasar Modal · Analisis Teks · NLP</p>', u
 st.markdown('<h1 class="app-title">Analisis Sentimen<br>Berita Keuangan</h1>', unsafe_allow_html=True)
 st.markdown('<p class="app-subtitle">Klasifikasi otomatis sentimen dari judul berita pasar modal menggunakan model NLP komparatif</p>', unsafe_allow_html=True)
 st.markdown('<hr class="header-sub-rule">', unsafe_allow_html=True)
-
+st.info(f"🔍 Daftar file/folder di server saat ini: {os.listdir('.')}")
 
 # ── Load models ──
 @st.cache_resource
