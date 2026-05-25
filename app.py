@@ -4,6 +4,32 @@ import numpy as np
 import joblib
 import re
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import os
+import zipfile
+import gdown
+
+
+@st.cache_resource
+def download_large_models():
+    if not os.path.exists("./model_indobert_final"):
+        with st.spinner("⏳ Menyiapkan model Deep Learning di Server Cloud (Proses ini hanya berjalan 1-2 menit saat pertama kali website dibuka)..."):
+            id_gdrive = "1fSgGWcs4ZQbaTyyZRSf-kXD6hKnifGw3" 
+            url = f'https://drive.google.com/uc?id={id_gdrive}'
+            output = 'models_final.zip'
+            
+            gdown.download(url, output, quiet=False)
+
+            with zipfile.ZipFile(output, 'r') as zip_ref:
+                zip_ref.extractall('.')
+                
+            if os.path.exists(output):
+                os.remove(output)
+
+try:
+    download_large_models()
+except Exception as e:
+    st.error(f"Gagal mengunduh model dari Google Drive Cloud. Error: {e}")
+
 
 st.set_page_config(
     page_title="Financial Sentiment Analyzer",
